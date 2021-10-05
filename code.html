@@ -2,7 +2,7 @@
 <html lang="en" class="h-100">
 
 <head>
-    <title>App Name: A Coding Project By Althea Hanson</title>
+    <title>RADAR: A Coding Project By Althea Hanson</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -23,7 +23,7 @@
     <nav class="navbar navbar-expand-md navbar-dark fixed-top">
         <div class="container-fluid">
             <a class="navbar-brand" href="#"><img src="img/Althea Hanson Mark transparent.png" class="d-inline align-text-top" 
-                width="30" height="24"> APP NAME</a>
+                width="30" height="24"> RADAR</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
                 aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -56,17 +56,90 @@
         <div class="row row-cols-1 row-cols-lg-2">
             <div class="col-lg-8">
                 <pre class="line-numbers"><code class="language-javascript">
-                    //Call Hello World
-                    function HelloWorld(){
-                    alert("hello World");
-                    }
+                    //get our user input
+function getValue(){
+
+   //make sure the alert is invisible
+   document.getElementById("alert").classList.add("invisible");   
+
+   //get user string from the page
+   let userString = document.getElementById("userString").value;
+
+   //check for a palindrome
+   let returnObj = checkForPalindrome(userString);
+
+   //display our message to the screen
+   displayMessage(returnObj);
+}
+
+//check if string is a palindrome
+//logic function
+function checkForPalindrome(userString){
+   
+    userString = userString.toLowerCase();
+
+   //remove spaces and special characters
+   let regex = /[^a-z0-9]/gi;
+   userString = userString.replace(regex, "");
+
+   let revString = [];
+   let returnObj = {};
+
+   //reverse a string using a for loop
+   for (let index = userString.length - 1 ; index >= 0; index--) {
+      revString += userString[index];
+      }
+   if (revString == userString){
+      returnObj.msg = "Well done! You entered a palindrome"
+   }
+   else {
+      returnObj.msg = "Sorry! You did not enter a palindrome"
+   }
+
+   returnObj.reversed = revString;
+
+   return returnObj;
+
+}
+
+//display the reversed string to the user
+//view function
+function displayMessage(returnObj){
+   
+   //write to the page
+   document.getElementById("alertHeader").innerHTML = returnObj.msg;
+   document.getElementById("msg").innerHTML = `Your phrase reversed is: ${returnObj.reversed}`;
+   //show the alert box
+   document.getElementById("alert").classList.remove("invisible");
+}
                 </code>
                 </pre>
             </div>
             <div class="col-lg-4">
-                <p> The code is structured in one function</p>
-                <h5> Hello World</h5>
-                <p> Hello world is a function that displays a message of "Hello World</p>
+                <p> The code is structured in three functions</p>
+                <h5> getValue</h5>
+                <p> getValues accepts(gets) the user input from the page. It utilizes 
+                    <strong>getElementById</strong> to pull the values from the page. The "Id" being used was declared on the app page.
+                    We then take the userString and pass it to <strong>checkForPalindrome</strong>, to then return an object. An object in JS
+                    has multiple properties and types. We then pass the returnObj to <strong>displayMessage</strong>to show to the screen.   
+                    
+                <h5> checkForPalindrome</h5>
+                <p> checkForPalindrome takes the userString and changes all the characters to <strong>lowerCase</strong>. It then sets a a new 
+                    variable regex(regular expression) to remove any special characters leaving all letters from a-z and numbers from 0-9. 
+                    <strong>.replace</strong> is then takes the regex match and replace it with an empty string.
+                    <br><br>
+                    We then have to reverse the string and check to see if it is a palindrome. After declaring an empty array revString and an empty string returnObj, 
+                    we use a decrementing <strong>for</strong> loop. So taking the userString, starting at the end of the string, taking the maximum length minus 1,
+                    at each loop, we add 1 until the index is equal to 0.
+                    <br><br>
+                    Using the <strong>if/else</strong> statments, we then check to see if the revString is equal to the userString. If it is correct,
+                    a WELL DONE message is displayed, else a sorry message is displayed using the returnObj.msg string.
+                </p>
+                <h5> displayMessage</h5>
+                <p>displayMessage uses returnObj and utilizes it to grab the alertHeader Id from the app page from the innerHTML, 
+                    and uses it print the returnOnj message to the screen. 
+                    It also uses the msg Id to display a message using template literal, then make it visible to the user by removing it 
+                    from being invivible. </p>
             </div>
         </div>
     </div>
